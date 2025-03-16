@@ -1,1 +1,1 @@
-web: cd modular_project && gunicorn modular_project.wsgi
+web: gunicorn --chdir modular_project modular_project.wsgi
