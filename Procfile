@@ -1,1 +1,1 @@
-web: gunicorn --chdir modular_project modular_project.wsgi
+web: cd modular_project && gunicorn modular_project.wsgi --workers 2 --timeout 600 --max-requests 1000 --max-requests-jitter 50 --log-level debug
