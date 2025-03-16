@@ -146,3 +146,11 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'module_list'
 LOGOUT_REDIRECT_URL = '/'  # Changed to root URL
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-fallback-secret-key')
+
+
+# Security Settings
+CSRF_TRUSTED_ORIGINS = ['https://modular-project-production.up.railway.app']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
