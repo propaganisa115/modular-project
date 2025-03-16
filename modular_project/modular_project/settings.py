@@ -85,13 +85,14 @@ WSGI_APPLICATION = 'modular_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('PGDATABASE'),
-        'USER': os.environ.get('PGUSER'),
-        'PASSWORD': os.environ.get('PGPASSWORD'),
-        'HOST': os.environ.get('PGHOST', 'trolley.proxy.rlwy.net'),  # Add default host
-        'PORT': os.environ.get('PGPORT', '32795'),  # Add default port
+        'NAME': os.environ.get('PGDATABASE', 'railway'),
+        'USER': os.environ.get('PGUSER', 'postgres'),
+        'PASSWORD': os.environ.get('PGPASSWORD'),  # Make sure this is set in Railway
+        'HOST': os.environ.get('PGHOST', 'trolley.proxy.rlwy.net'),
+        'PORT': os.environ.get('PGPORT', '32795'),
         'OPTIONS': {
             'sslmode': 'require',
+            'connect_timeout': 30,
         },
     }
 }
