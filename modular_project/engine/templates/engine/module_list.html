@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Module Management{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>Available Modules</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Module Name</th>
+                    <th>Status</th>
+                    <th>Landing Page</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in modules %}
+                <tr>
+                    <td>{{ module.name }}</td>
+                    <td>
+                        {% if module.installed %}
+                            <span class="badge bg-success">Installed</span>
+                        {% else %}
+                            <span class="badge bg-danger">Not Installed</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if module.installed %}
+                            {% if module.name == 'Example Module' %}
+                                <a href="{% url 'example_module:product_list' %}" class="btn btn-info btn-sm">View Page</a>
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>                    
+                    <td>
+                        {% if module.installed %}
+                            <a href="{% url 'uninstall_module' module.name %}" class="btn btn-danger btn-sm">Uninstall</a>
+                            <a href="{% url 'upgrade_module' module.name %}" class="btn btn-warning btn-sm">Upgrade</a>
+                        {% else %}
+                            <a href="{% url 'install_module' module.name %}" class="btn btn-success btn-sm">Install</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

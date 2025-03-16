@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4>Products</h4>
+        {% if user.is_authenticated and user.groups.all %}
+        <a href="{% url 'example_module:product_create' %}" class="btn btn-primary">Add Product</a>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Barcode</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    {% if user.is_authenticated and user.groups.all %}
+                    <th>Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.barcode }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    {% if user.is_authenticated and user.groups.all %}
+                    <td>
+                        <a href="{% url 'example_module:product_update' product.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                        {% if user.groups.all.0.name == 'manager' %}
+                        <a href="{% url 'example_module:product_delete' product.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

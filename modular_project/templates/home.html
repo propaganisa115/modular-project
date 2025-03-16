@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Modular System{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-4">Welcome to Modular System</h1>
+    <p class="lead">A flexible and modular Django application system</p>
+    
+    {% if not user.is_authenticated %}
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login to Access Modules</a>
+    </div>
+    {% else %}
+    <div class="mt-4">
+        <a href="{% url 'module_list' %}" class="btn btn-primary btn-lg">Go to Modules</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
