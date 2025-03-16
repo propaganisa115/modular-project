@@ -170,34 +170,31 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  #
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+            'level': 'ERROR',
         },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'django.log',
-            'formatter': 'verbose',
-        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'handlers': ['console'],
+            'level': 'ERROR',
             'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
         },
     },
 }
 
-# Make sure DEBUG is truly enabled
+# Force debug mode
 DEBUG = True
-ALLOWED_HOSTS = ['*']
 
-# Remove duplicate settings below this line
+# Remove any duplicate DEBUG settings
