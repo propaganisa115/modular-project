@@ -88,8 +88,11 @@ DATABASES = {
         'NAME': os.environ.get('PGDATABASE'),
         'USER': os.environ.get('PGUSER'),
         'PASSWORD': os.environ.get('PGPASSWORD'),
-        'HOST': os.environ.get('PGHOST'),
-        'PORT': os.environ.get('PGPORT'),
+        'HOST': os.environ.get('PGHOST', 'trolley.proxy.rlwy.net'),  # Add default host
+        'PORT': os.environ.get('PGPORT', '32795'),  # Add default port
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
